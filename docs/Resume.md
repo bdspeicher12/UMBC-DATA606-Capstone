@@ -2,7 +2,7 @@
 
 ![Bennett Speicher](headshot.jpg)
 
-**Columbia, MD**
+**Baltimore, MD**
 
 [bdspeicher@gmail.com](mailto:bdspeicher@gmail.com) | [LinkedIn](https://www.linkedin.com/in/bennettspeicher/) | [GitHub](https://github.com/bdspeicher12)
 
