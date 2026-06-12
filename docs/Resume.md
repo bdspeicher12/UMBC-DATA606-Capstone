@@ -4,7 +4,7 @@
 
 **Columbia, MD**
 
-[bdspeicher@gmail.com](mailto:bdspeicher@gmail.com) | [LinkedIn](https://www.linkedin.com/in/your-profile) | [GitHub](https://github.com/bdspeicher12)
+[bdspeicher@gmail.com](mailto:bdspeicher@gmail.com) | [LinkedIn](https://www.linkedin.com/in/bennettspeicher/) | [GitHub](https://github.com/bdspeicher12)
 
 ---
 
