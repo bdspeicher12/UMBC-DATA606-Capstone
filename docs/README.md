@@ -4,10 +4,10 @@ Project documentation and deliverables.
 
 ## Contents
 
-- [`Resume.md`](Resume.md) — author's resume (Markdown)
-- `headshot.jpg` — headshot photo referenced by the resume *(add your photo file here)*
-- `proposal.md` — project proposal *(Assignment 2)*
-- Final report, presentation, and demo links *(later in the semester)*
+- [`Resume.md`](Resume.md) — resume (Markdown)
+- `headshot.jpg` — headshot photo referenced by the resume
+- `proposal.md` — project proposal (Assignment 2)
+- Final report, presentation, and demo links
 
 ## To Do
 
