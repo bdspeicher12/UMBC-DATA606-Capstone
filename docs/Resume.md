@@ -2,8 +2,6 @@
 
 ![Bennett Speicher](headshot.jpg)
 
-*Replace `headshot.jpg` with your actual photo — upload the image file into this `docs/` folder and keep the file name the same (or update the name above to match).*
-
 **Columbia, MD**
 
 [bdspeicher@gmail.com](mailto:bdspeicher@gmail.com) | [LinkedIn](https://www.linkedin.com/in/your-profile) | [GitHub](https://github.com/bdspeicher12)
