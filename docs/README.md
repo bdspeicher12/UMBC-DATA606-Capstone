@@ -11,6 +11,5 @@ Project documentation and deliverables.
 
 ## To Do
 
-- [ ] Upload a `headshot.jpg` photo into this folder for the resume
 - [ ] Add `proposal.md` (Assignment 2)
 - [ ] Add the final report and presentation links
