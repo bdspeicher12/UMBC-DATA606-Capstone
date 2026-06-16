@@ -5,10 +5,9 @@
 - **Project Title:** Predicting Movie Box-Office Success Before Release
 - Prepared for UMBC Data Science Master Degree Capstone by Dr. Chaojie (Jay) Wang
 - **Author:** Bennett Speicher
-- **GitHub Repository:** https://github.com/bdspeicher12/UMBC-DATA606-Capstone
 - **LinkedIn:** https://www.linkedin.com/in/bennettspeicher/
-- **PowerPoint Presentation:** *to be added*
-- **YouTube Video:** *to be added*
+- **PowerPoint Presentation:** 
+- **YouTube Video:** 
 
 ---
 
