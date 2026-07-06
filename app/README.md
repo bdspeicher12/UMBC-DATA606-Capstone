@@ -1,12 +1,14 @@
 # App
 
-Source code for the interactive web application that serves the trained model.
+This folder will hold the interactive web application for the project.
 
-## Contents
+## Plan
 
-*The application will be added later in the semester (Assignment 4).*
+A **Streamlit** app that loads the trained model and lets a user enter a hypothetical film's pre-release attributes (budget, genre, runtime, release timing, language, etc.) and returns a predicted probability of box-office success.
 
-## Planned Stack
+The application is part of the **final deliverable** and will be added after model training. Once built, it will run with:
 
-## Running the App (once built)
-
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```

@@ -10,22 +10,27 @@
 
 ## About
 
-This repository contains the work for my DATA 606 capstone project, developed across the course assignments: project proposal, exploratory data analysis (EDA), model training, and a final deployed application.
+This repository contains my DATA 606 capstone project, developed across the course assignments: proposal, exploratory data analysis (EDA), model training, and a final deployed application.
 
-## Project (Proposed)
+## Project — Predicting Movie Box-Office Success Before Release
 
-*Topic and data sources are tentative pending proposal approval (Assignment 2).*
+A machine-learning project that predicts whether a film will be a **financial success** — defined as earning at least **2× its production budget** — using only information knowable *before* release (budget, genre, runtime, release timing, language, and production companies). A special focus is **release timing**: how season and release window relate to success, and how that interacts with genre.
+
+The full write-up is in [`docs/report.md`](docs/report.md), and the exploratory analysis is in [`notebooks/eda.ipynb`](notebooks/eda.ipynb).
 
 ## Repository Structure
 
 | Folder | Contents |
 | --- | --- |
-| [`data/`](data/) | Datasets used in the project |
-| [`notebooks/`](notebooks/) | Jupyter notebooks for exploration, EDA, and modeling |
-| [`app/`](app/) | Source code for the interactive web application |
-| [`docs/`](docs/) | Project documentation, proposal, final report, and resume |
+| [`data/`](data/) | The TMDB movie dataset used in the project |
+| [`notebooks/`](notebooks/) | Jupyter notebook(s) for EDA and (later) modeling |
+| [`app/`](app/) | Streamlit web application (final deliverable) |
+| [`docs/`](docs/) | Project report, resume, figures, and presentation |
 
 ## Links
 
+- **Project Report:** [docs/report.md](docs/report.md)
 - **Resume:** [docs/Resume.md](docs/Resume.md)
-- **Presentation:** *to be added*
+- **LinkedIn:** https://www.linkedin.com/in/bennettspeicher/
+- **GitHub:** https://github.com/bdspeicher12
+- **Presentation & demo video:** *to be added with the final deliverable*

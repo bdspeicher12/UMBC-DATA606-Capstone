@@ -1,17 +1,15 @@
 # Notebooks
 
-Jupyter notebooks for the capstone project — data exploration, cleaning, exploratory data analysis (EDA), feature engineering, and model training/evaluation.
+Jupyter notebooks for the capstone project.
 
 ## Contents
 
-*Notebooks will be added as the project develops, for example:*
+- **`eda.ipynb`** — the complete exploratory data analysis: data quality checks, cleaning and feature engineering, the `success` target, univariate and bivariate analysis, a dedicated release-timing / seasonality section, genre × timing interactions, and correlations. Charts are rendered with Plotly Express (saved as static images so they display on GitHub).
 
-- `01_eda.ipynb` — exploratory data analysis and visualizations
-- `02_preprocessing.ipynb` — cleaning, feature engineering, train/test split
-- `03_modeling.ipynb` — model training, tuning, and evaluation
+A separate modeling notebook (train/test split, model training and evaluation) will be added for the final deliverable.
 
 ## Environment
 
 - Python 3
-- Key libraries: pandas, scikit-learn, plotly (visualizations)
-- Developed in Jupyter / Google Colab
+- Key libraries: pandas, plotly, scikit-learn
+- Developed in Jupyter
