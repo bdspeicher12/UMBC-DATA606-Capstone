@@ -1,16 +1,17 @@
 # Predicting Movie Box-Office Success Before Release
 
-*This document is the evolving project report. It began as the proposal (Sections 1–3) and now includes the completed exploratory data analysis (Section 4). Model training, the application, and conclusions will be added in later sections.*
+*This is the project report for the capstone. It covers the background and research questions, the data, the exploratory data analysis (Section 4), the machine-learning results (Section 5), the application (Section 6), and the conclusion (Section 7). It began as the course proposal and grew into this final report.*
 
 ## 1. Title and Author
 
 - **Project Title:** Predicting Movie Box-Office Success Before Release
 - Prepared for UMBC Data Science Master Degree Capstone by Dr. Chaojie (Jay) Wang
 - **Author:** Bennett Speicher
+- **Semester:** Summer 2026
 - **GitHub Repository:** https://github.com/bdspeicher12/UMBC-DATA606-Capstone
 - **LinkedIn:** https://www.linkedin.com/in/bennettspeicher/
-- **PowerPoint Presentation:** *to be added (final deliverable)*
-- **YouTube Video:** *to be added (final deliverable)*
+- **PowerPoint Presentation:** [final_presentation.pptx](final_presentation.pptx)
+- **YouTube Video:** *to be added after recording*
 
 ---
 
@@ -60,7 +61,7 @@ Together these mean a film must gross roughly twice its production budget to bre
 | File size | ~5.7 MB |
 | Raw rows (movies) | 4,803 |
 | Raw columns | 20 |
-| Usable rows after cleaning | 3,228 (≈67%) |
+| Usable rows after cleaning | 3,215 (≈67%) |
 | Time period | Release years **1916–2016** |
 
 **What each row represents:** one **movie**.
@@ -130,16 +131,16 @@ The full analysis, with code and commentary, is in [`../notebooks/eda.ipynb`](..
 Starting from 4,803 raw movies, the following steps produce a clean, tidy, model-ready dataset:
 
 1. **Keep released films only** (`status == "Released"`).
-2. **Drop rows with unknown budget or revenue.** In TMDB a value of `0` encodes "unknown." Because our target and ROI are budget-relative, these rows would be misleading, so we require `budget > 0` **and** `revenue > 0`.
+2. **Drop rows with unknown or impossible budget/revenue.** TMDB uses `0` for "unknown," and 13 films have impossible budgets ($1–$250 — data-entry errors, separated from the real films by a clear gap; the lowest legitimate budget is *Primer* at $7,000). We require **budget ≥ $1,000** and **revenue > 0**.
 3. **Require a release date** (needed for the timing analysis) and remove duplicate title/date rows.
 4. **Parse JSON columns** (`genres`, `production_companies`, `spoken_languages`) into usable values.
 5. **Engineer features** — financial (`roi`, `profit`, `success`), timing (`year`, `month`, `season`, `release_window`), counts, and the genre-timing flags.
 
-After cleaning, **3,228 movies (≈67% of the raw data)** remain, spanning **1916–2016**. Sparse columns (`homepage`, `tagline`) are dropped. Each row is one movie, each column one property — a tidy dataset.
+After cleaning, **3,215 movies (≈67% of the raw data)** remain, spanning **1916–2016**. Sparse columns (`homepage`, `tagline`) are dropped. Each row is one movie, each column one property — a tidy dataset.
 
 ### 4.2 The target variable
 
-Under the 2× definition the target is nearly balanced — **56.0% successes (1,809)** vs. **44.0% non-successes (1,419)**. This balance means accuracy is a meaningful metric and the model won't be biased toward a majority class.
+Under the 2× definition the target is nearly balanced — **56.1% successes (1,803)** vs. **43.9% non-successes (1,412)**. This balance means accuracy is a meaningful metric and the model won't be biased toward a majority class.
 
 ![Target balance](figures/target_balance.png)
 
@@ -155,7 +156,7 @@ Success rate also varies by **genre**. Horror, Animation, and Adventure clear th
 
 ### 4.4 Release timing and seasonality
 
-Release timing is a clear source of signal. The chart below overlays the **success rate** (line) with the **number of releases** (bars) for each month. Success peaks in **June (67%)** and stays high across summer and December, and collapses in **September (44%)** — which, notably, is also one of the highest-volume months, consistent with the industry's early-fall "dump" period.
+Release timing is a clear source of signal. The chart below overlays the **success rate** (line) with the **number of releases** (bars) for each month. Success peaks in **June (67%)** and stays high across summer and December, and collapses in **September (43%)** — which, notably, is also one of the highest-volume months, consistent with the industry's early-fall "dump" period.
 
 ![Success and volume by month](figures/month_success_volume.png)
 
@@ -163,11 +164,11 @@ Grouped into industry release windows, the pattern is unmistakable (overall base
 
 | Release window | Success rate | Median ROI |
 | --- | --- | --- |
-| Summer blockbuster (May–Aug) | **61.2%** | 2.62 |
-| Holiday (Nov–Dec) | **61.1%** | 2.64 |
-| Spring (Mar–Apr) | 53.4% | 2.13 |
-| Dump months (Jan–Feb) | 52.4% | 2.10 |
-| Fall (Sep–Oct) | **47.4%** | 1.89 |
+| Summer blockbuster (May–Aug) | **61.5%** | 2.63 |
+| Holiday (Nov–Dec) | **61.2%** | 2.64 |
+| Spring (Mar–Apr) | 53.5% | 2.13 |
+| Dump months (Jan–Feb) | 52.3% | 2.09 |
+| Fall (Sep–Oct) | **47.1%** | 1.88 |
 
 ![Success rate by release window](figures/release_window.png)
 
@@ -177,7 +178,7 @@ The timing effect is strongest for *specific genres in specific windows* — exa
 
 | Genre-timing bet | In window | Rest of year | Lift |
 | --- | --- | --- | --- |
-| Action/Adventure in Summer (May–Jul) | **64.0%** | 49.9% | **+14 pp** |
+| Action/Adventure in Summer (May–Jul) | **64.1%** | 50.0% | **+14 pp** |
 | Family/Animation in Holiday (Nov–Dec) | **68.2%** | 57.9% | **+10 pp** |
 | Horror in October | 70.8% | 66.5% | +4 pp |
 
@@ -196,6 +197,83 @@ Two notes on horror specifically: it is a standout genre overall (**67% success*
 
 ---
 
-## 5–8. (To be completed in later assignments)
+## 5. Model Training & Results
 
-Model training and evaluation, the Streamlit web application, conclusions, and references will be added in subsequent assignments.
+The full modeling workflow, with code, is in [`../notebooks/modeling.ipynb`](../notebooks/modeling.ipynb).
+
+### 5.1 Features and setup
+
+Only **pre-release** attributes are used as predictors: `budget` (log-scaled), `runtime`, `n_genres`, `n_production_companies`, `n_spoken_languages`, `year`, `budget_per_min` (spend intensity), `is_english`, the genre-timing flags (`is_summer_action_adv`, `is_october_horror`, `is_holiday_family`), two engineered signals — **`is_sequel`** (franchise/sequel/adaptation, from plot keywords and title patterns) and **`is_major_studio`** (produced by a major studio) — and the categorical `primary_genre`, `season`, and `release_window`. Post-release fields (`revenue`, `roi`, `profit`, `popularity`, `vote_average`, `vote_count`) are **excluded to prevent leakage**.
+
+The two engineered signals carry clear standalone signal: **sequels/franchise films succeed 68.1% vs. 53.7%** for originals, and **major-studio films 60.9% vs. 50.9%** for others.
+
+Numeric features are median-imputed and standardized; categoricals are one-hot encoded; flags pass through. The data is split **80/20 with stratification** — **2,572 training** and **643 test** films — preserving the ~56% class balance. The majority-class baseline is therefore **56.1% accuracy**.
+
+### 5.2 Results
+
+Three classifiers were trained and evaluated on the held-out test set, and additionally validated with **5-fold cross-validation** for robustness:
+
+| Model | Accuracy | Precision | Recall | F1 | ROC-AUC |
+| --- | --- | --- | --- | --- | --- |
+| Gradient Boosting | **0.683** | 0.703 | 0.753 | 0.727 | 0.713 |
+| **Random Forest (tuned)** | 0.663 | 0.682 | 0.748 | 0.713 | **0.715** |
+| Logistic Regression | 0.617 | 0.643 | 0.715 | 0.677 | 0.666 |
+
+Cross-validated (mean ± std over 5 folds):
+
+| Model | CV Accuracy | CV ROC-AUC |
+| --- | --- | --- |
+| **Random Forest (tuned)** | **0.640 ± 0.020** | **0.683 ± 0.025** |
+| Gradient Boosting | 0.630 ± 0.012 | 0.676 ± 0.019 |
+| Logistic Regression | 0.609 ± 0.015 | 0.650 ± 0.029 |
+
+The **tuned Random Forest is the most robust model** (best cross-validated ROC-AUC, 0.683; held-out AUC 0.715), with Gradient Boosting essentially tied. All models beat the 56.1% baseline on both evaluations, confirming that pre-release attributes carry real predictive signal. The engineered features mattered: versus the EDA-only feature set, adding the sequel/franchise flag, major-studio flag, release year, and spend intensity lifted cross-validated ROC-AUC from ~0.66 to ~0.68 (and held-out AUC from 0.656 to 0.715). High recall (~0.75) means the model catches most true successes, at the cost of some false positives.
+
+![Model comparison](figures/model_comparison.png)
+
+![ROC curves](figures/roc_curves.png)
+
+![Confusion matrix](figures/confusion_matrix.png)
+
+### 5.3 What drives the predictions
+
+Feature importances (from the best model) show the **financial features dominate** — spend intensity (budget per minute), release year, and budget are the top three — followed by **runtime** and the **number of production companies**. The engineered **major-studio** and **sequel** flags, **genre** (Horror stands out), and the **release-timing features** (`release_window`, `season`) all appear in the top 15 — real secondary contributions that echo the EDA.
+
+![Feature importance](figures/feature_importance.png)
+
+---
+
+## 6. Application
+
+The trained model is served through a **Streamlit web application** (in the [`app/`](../app/) folder). A user enters a hypothetical film's **pre-release** attributes — budget, genre, runtime, release month/season, language, and number of production companies — and the app returns a **predicted probability of box-office success** along with the predicted class. This turns the model into an interactive decision-support tool of the kind a studio or investor could consult before greenlighting or scheduling a film.
+
+---
+
+## 7. Conclusion
+
+### Summary
+
+Using only information available **before a film is released**, the model predicts box-office success — defined as revenue ≥ 2× budget — meaningfully better than chance (held-out ROC-AUC up to 0.715 and accuracy up to 68%, ~0.68 AUC / 64% accuracy cross-validated, vs. a 56% baseline). Budget is the dominant driver, but genre and release timing add real, independent signal. The project delivers an end-to-end pipeline — from raw TMDB data through a cleaned, feature-engineered dataset, EDA, model comparison, and a deployed app.
+
+### Limitations
+
+- **The target is a proxy.** TMDB `revenue` is worldwide box-office *gross*, and `budget` excludes marketing, so `revenue ≥ 2 × budget` approximates profitability rather than measuring it exactly.
+- **Dropped data.** About 33% of rows were removed because budget or revenue was recorded as 0 ("unknown") or an implausible value, which may bias the sample toward larger, better-documented films.
+- **Dataset scope.** The data spans 1916–2016 and skews toward higher-budget, English-language releases; results may not generalize to very recent films, streaming releases, or small independents.
+- **Accuracy ceiling.** Much of what determines a film's fate — reviews, word of mouth, marketing spend, and competition — emerges only *after* release and is intentionally excluded here, which caps how well any pre-release model can do.
+
+### Future research
+
+- Add features that are known early but missing here: **marketing budget, cast/director star power, and competition** in the release window.
+- Bring in **more recent data** and streaming performance.
+- Apply **NLP** to the plot overview and keywords to capture content signal.
+- Try **regression on revenue or ROI tiers** rather than a single binary cutoff, and tune hyperparameters or ensemble the models for additional lift.
+
+---
+
+## 8. References
+
+1. The Movie Database (TMDb) — *TMDB 5000 Movie Dataset*, via Kaggle.
+2. scikit-learn — Pedregosa et al., *Scikit-learn: Machine Learning in Python*, JMLR 2011.
+3. Plotly — *Plotly Python graphing library*.
+4. Industry background on prints-and-advertising (P&A) spend and exhibitor revenue splits informing the 2× break-even heuristic.
