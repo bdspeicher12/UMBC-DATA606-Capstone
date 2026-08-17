@@ -10,8 +10,8 @@
 - **Semester:** Summer 2026
 - **GitHub Repository:** https://github.com/bdspeicher12/UMBC-DATA606-Capstone
 - **LinkedIn:** https://www.linkedin.com/in/bennettspeicher/
-- **PowerPoint Presentation:** [final_presentation.pptx](final_presentation.pptx) · [View as PDF](final_presentation.pdf) · [View online (Google Slides)](https://docs.google.com/presentation/d/1kRvMj0KEiqLqh8AuxxDhoGaGhuLmBKCP57AYgvOtgcU/edit?usp=sharing)
-- **YouTube Video:** *to be added after recording*
+- **PowerPoint Presentation:** [final_presentation.pptx](final_presentation.pptx) · [View as PDF](final_presentation.pdf) · [View online (Google Slides)](https://docs.google.com/presentation/d/13EGc8lZpJxrUhPf_aqsFaKigRUP4u0kkIQv8iSqVAes/edit?usp=sharing)
+- **YouTube Video:** [Watch the presentation](https://youtu.be/f0QvQeHOiIY)
 
 ---
 
