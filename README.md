@@ -33,4 +33,5 @@ The full write-up is in [`docs/report.md`](docs/report.md), and the exploratory 
 - **Resume:** [docs/Resume.md](docs/Resume.md)
 - **LinkedIn:** https://www.linkedin.com/in/bennettspeicher/
 - **GitHub:** https://github.com/bdspeicher12
-- **Presentation & demo video:** *to be added with the final deliverable*
+- **Presentation:** [final_presentation.pptx](docs/final_presentation.pptx) · [PDF](docs/final_presentation.pdf) · [Google Slides](https://docs.google.com/presentation/d/13EGc8lZpJxrUhPf_aqsFaKigRUP4u0kkIQv8iSqVAes/edit?usp=sharing)
+- **YouTube Video:** [Watch the presentation](https://youtu.be/f0QvQeHOiIY)
